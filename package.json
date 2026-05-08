@@ -1,0 +1,36 @@
+{
+  "name": "react-fashion-gallery",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "dev:server": "NODE_ENV=development DATABASE_PATH=./data/app.db node server/start.js",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server/start.js",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "bcryptjs": "latest",
+    "better-sqlite3": "latest",
+    "cookie-parser": "latest",
+    "express": "latest",
+    "lucide-react": "latest",
+    "nanoid": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/user-event": "latest",
+    "jsdom": "latest",
+    "supertest": "^7.2.2",
+    "vitest": "latest"
+  }
+}
