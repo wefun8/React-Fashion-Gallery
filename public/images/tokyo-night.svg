@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#111111"/>
+  <rect x="70" y="70" width="760" height="1060" fill="#ff4d63"/>
+  <circle cx="650" cy="280" r="170" fill="#d8ff28"/>
+  <rect x="150" y="360" width="600" height="680" fill="#5be7ff" opacity="0.72"/>
+  <text x="90" y="1120" fill="#ffffff" font-family="Arial Black, Arial, sans-serif" font-size="66">TOKYO NIGHT</text>
+</svg>

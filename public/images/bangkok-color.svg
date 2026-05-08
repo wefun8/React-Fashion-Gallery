@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#ff4d63"/>
+  <rect x="70" y="70" width="760" height="1060" fill="#d8ff28"/>
+  <circle cx="280" cy="280" r="165" fill="#5be7ff"/>
+  <rect x="150" y="400" width="600" height="590" fill="#111111"/>
+  <text x="90" y="1120" fill="#ffffff" font-family="Arial Black, Arial, sans-serif" font-size="66">BANGKOK COLOR</text>
+</svg>

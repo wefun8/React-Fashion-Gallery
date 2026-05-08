@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#fbfaf5"/>
+  <rect x="70" y="70" width="760" height="1060" fill="#111111"/>
+  <circle cx="290" cy="280" r="160" fill="#d8ff28"/>
+  <rect x="170" y="390" width="560" height="610" fill="#ffffff"/>
+  <text x="90" y="1120" fill="#d8ff28" font-family="Arial Black, Arial, sans-serif" font-size="66">SEOUL STUDIO</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#111111"/>
+  <rect x="70" y="70" width="760" height="1060" fill="#5be7ff"/>
+  <circle cx="640" cy="330" r="145" fill="#ffffff"/>
+  <rect x="140" y="430" width="620" height="520" fill="#d8ff28"/>
+  <text x="90" y="1120" fill="#ffffff" font-family="Arial Black, Arial, sans-serif" font-size="66">SHANGHAI NEON</text>
+</svg>

@@ -1,5 +1,7 @@
 # React Fashion Gallery
 
+![React Fashion Gallery 展示图](docs/assets/github-showcase.png)
+
 一个可使用 Docker 部署的图片展示网站。前端使用 Vite + React，生产环境由 Node/Express 同时提供静态页面和 `/api/*` 接口；用户、会话和访客申请信息存储在 SQLite 数据库中。
 
 ## 功能概览

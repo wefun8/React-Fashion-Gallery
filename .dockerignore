@@ -1,0 +1,8 @@
+node_modules
+dist
+data
+.git
+.superpowers
+docs/superpowers/plans
+docs/superpowers/specs
+npm-debug.log

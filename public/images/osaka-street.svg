@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#d8ff28"/>
+  <rect x="70" y="70" width="760" height="1060" fill="#ffffff"/>
+  <circle cx="620" cy="260" r="170" fill="#ff4d63"/>
+  <rect x="130" y="430" width="640" height="520" fill="#111111"/>
+  <text x="90" y="1120" fill="#111111" font-family="Arial Black, Arial, sans-serif" font-size="66">OSAKA STREET</text>
+</svg>

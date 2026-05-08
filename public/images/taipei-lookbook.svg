@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#5be7ff"/>
+  <rect x="70" y="70" width="760" height="1060" fill="#fbfaf5"/>
+  <circle cx="260" cy="290" r="150" fill="#111111"/>
+  <rect x="170" y="420" width="560" height="570" fill="#ff4d63"/>
+  <text x="90" y="1120" fill="#111111" font-family="Arial Black, Arial, sans-serif" font-size="66">TAIPEI LOOK</text>
+</svg>

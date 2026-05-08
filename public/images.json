@@ -1,0 +1,70 @@
+{
+  "site": {
+    "title": "Girl Mode",
+    "notice": "Content is configured by the site owner. Confirm that you are legally allowed to view the content in your location.",
+    "restrictedTags": ["members", "private"]
+  },
+  "images": [
+    {
+      "id": "tokyo-night",
+      "src": "/images/tokyo-night.svg",
+      "title": "Tokyo Night",
+      "location": "Tokyo",
+      "photographer": "Studio Sample",
+      "date": "2026-04-12",
+      "visibility": "members",
+      "tags": ["street", "night", "lookbook"],
+      "description": "A local placeholder image for the featured street issue."
+    },
+    {
+      "id": "seoul-studio",
+      "src": "/images/seoul-studio.svg",
+      "title": "Seoul Studio",
+      "location": "Seoul",
+      "photographer": "Studio Sample",
+      "date": "2026-03-18",
+      "tags": ["studio", "clean", "lookbook", "members"],
+      "description": "A local placeholder image for a studio set."
+    },
+    {
+      "id": "osaka-street",
+      "src": "/images/osaka-street.svg",
+      "title": "Osaka Street",
+      "location": "Osaka",
+      "photographer": "Studio Sample",
+      "date": "2026-03-02",
+      "tags": ["street", "city", "new"],
+      "description": "A local placeholder image for a city look."
+    },
+    {
+      "id": "taipei-lookbook",
+      "src": "/images/taipei-lookbook.svg",
+      "title": "Taipei Lookbook",
+      "location": "Taipei",
+      "photographer": "Studio Sample",
+      "date": "2026-02-14",
+      "tags": ["lookbook", "color", "studio"],
+      "description": "A local placeholder image for a color-forward lookbook."
+    },
+    {
+      "id": "shanghai-neon",
+      "src": "/images/shanghai-neon.svg",
+      "title": "Shanghai Neon",
+      "location": "Shanghai",
+      "photographer": "Studio Sample",
+      "date": "2026-01-30",
+      "tags": ["night", "city", "neon"],
+      "description": "A local placeholder image for a neon issue."
+    },
+    {
+      "id": "bangkok-color",
+      "src": "/images/bangkok-color.svg",
+      "title": "Bangkok Color",
+      "location": "Bangkok",
+      "photographer": "Studio Sample",
+      "date": "2026-01-12",
+      "tags": ["color", "new", "street"],
+      "description": "A local placeholder image for a bright street set."
+    }
+  ]
+}
