@@ -46,6 +46,8 @@ describe("normalizeGalleryData", () => {
       title: "A",
       location: "",
       photographer: "",
+      visibility: "public",
+      likes: expect.any(Number),
       description: ""
     });
   });
@@ -108,6 +110,18 @@ describe("normalizeGalleryData", () => {
       "members",
       "public"
     ]);
+  });
+
+  it("normalizes likes and creates a stable fallback", () => {
+    const data = normalizeGalleryData({
+      images: [
+        { id: "liked", src: "/liked.svg", title: "Liked", tags: ["street"], likes: 42 },
+        { id: "fallback", src: "/fallback.svg", title: "Fallback", tags: ["studio"] }
+      ]
+    });
+
+    expect(data.images[0].likes).toBe(42);
+    expect(data.images[1].likes).toBeGreaterThanOrEqual(72);
   });
 });
 

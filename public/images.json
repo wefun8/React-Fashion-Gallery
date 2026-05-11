@@ -12,6 +12,7 @@
       "location": "Tokyo",
       "photographer": "Studio Sample",
       "date": "2026-04-12",
+      "likes": 153,
       "visibility": "members",
       "tags": ["street", "night", "lookbook"],
       "description": "A local placeholder image for the featured street issue."
@@ -23,6 +24,7 @@
       "location": "Seoul",
       "photographer": "Studio Sample",
       "date": "2026-03-18",
+      "likes": 96,
       "tags": ["studio", "clean", "lookbook", "members"],
       "description": "A local placeholder image for a studio set."
     },
@@ -33,6 +35,7 @@
       "location": "Osaka",
       "photographer": "Studio Sample",
       "date": "2026-03-02",
+      "likes": 128,
       "tags": ["street", "city", "new"],
       "description": "A local placeholder image for a city look."
     },
@@ -43,6 +46,7 @@
       "location": "Taipei",
       "photographer": "Studio Sample",
       "date": "2026-02-14",
+      "likes": 112,
       "tags": ["lookbook", "color", "studio"],
       "description": "A local placeholder image for a color-forward lookbook."
     },
@@ -53,6 +57,7 @@
       "location": "Shanghai",
       "photographer": "Studio Sample",
       "date": "2026-01-30",
+      "likes": 141,
       "tags": ["night", "city", "neon"],
       "description": "A local placeholder image for a neon issue."
     },
@@ -63,6 +68,7 @@
       "location": "Bangkok",
       "photographer": "Studio Sample",
       "date": "2026-01-12",
+      "likes": 87,
       "tags": ["color", "new", "street"],
       "description": "A local placeholder image for a bright street set."
     }

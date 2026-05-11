@@ -119,8 +119,8 @@ describe("App", () => {
 
     render(<App />);
 
-    expect(await screen.findAllByText("Tokyo Night")).toHaveLength(2);
-    await user.type(screen.getByPlaceholderText(/title, city, tag/i), "Seoul");
+    expect(await screen.findByText("Tokyo Night")).toBeInTheDocument();
+    await user.type(screen.getByPlaceholderText(/search looks, tags, styles/i), "Seoul");
 
     expect(screen.getAllByText("Seoul Studio")).toHaveLength(2);
     expect(screen.queryByText("Tokyo Night")).not.toBeInTheDocument();

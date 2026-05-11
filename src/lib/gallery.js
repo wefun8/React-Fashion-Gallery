@@ -23,6 +23,16 @@ function normalizeVisibility(visibility) {
   return text(visibility).toLowerCase() === "members" ? "members" : "public";
 }
 
+function normalizeLikes(value, fallbackSeed) {
+  if (Number.isFinite(value) && value >= 0) {
+    return Math.round(value);
+  }
+
+  const seed = text(fallbackSeed);
+  const total = [...seed].reduce((sum, character) => sum + character.charCodeAt(0), 0);
+  return 72 + (total % 94);
+}
+
 export function normalizeGalleryData(rawData) {
   const site = {
     ...DEFAULT_SITE,
@@ -42,6 +52,7 @@ export function normalizeGalleryData(rawData) {
       date: text(image.date),
       tags: normalizeTags(image.tags),
       visibility: normalizeVisibility(image.visibility),
+      likes: normalizeLikes(image.likes, image.id || image.title),
       description: text(image.description)
     }))
     .filter(

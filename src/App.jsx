@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import AdminRequestsPanel from "./components/AdminRequestsPanel.jsx";
 import AgeGate from "./components/AgeGate.jsx";
 import AuthControls from "./components/AuthControls.jsx";
@@ -41,6 +42,7 @@ export default function App() {
   const [needsFirstAdmin, setNeedsFirstAdmin] = useState(false);
   const [restrictedTags, setRestrictedTags] = useState([]);
   const [activeDialog, setActiveDialog] = useState(null);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
 
   const loadSetupAndAccess = useCallback(async () => {
     const [setupResult, accessResult] = await Promise.allSettled([
@@ -147,7 +149,20 @@ export default function App() {
     [images, selectedImageId]
   );
 
-  const featuredImage = visibleImages[0] ?? images[0] ?? null;
+  const featuredCandidates = useMemo(() => {
+    const candidates = visibleImages.length > 0 ? visibleImages : images;
+    const viewableCandidates = candidates.filter((image) => canViewImage(image, restrictedTags, user));
+    return viewableCandidates.length > 0 ? viewableCandidates : candidates;
+  }, [images, restrictedTags, user, visibleImages]);
+
+  const featuredImage =
+    featuredCandidates.length > 0
+      ? featuredCandidates[featuredIndex % featuredCandidates.length]
+      : null;
+
+  useEffect(() => {
+    setFeaturedIndex(0);
+  }, [activeTag, query, sortMode]);
 
   const resetFilters = useCallback(() => {
     setQuery("");
@@ -169,6 +184,20 @@ export default function App() {
   const retryLoad = useCallback(() => {
     setReloadToken((token) => token + 1);
   }, []);
+
+  const showPreviousFeature = useCallback(() => {
+    setFeaturedIndex((index) => {
+      const count = featuredCandidates.length || 1;
+      return (index - 1 + count) % count;
+    });
+  }, [featuredCandidates.length]);
+
+  const showNextFeature = useCallback(() => {
+    setFeaturedIndex((index) => {
+      const count = featuredCandidates.length || 1;
+      return (index + 1) % count;
+    });
+  }, [featuredCandidates.length]);
 
   const openImage = useCallback(
     (image) => {
@@ -265,63 +294,79 @@ export default function App() {
 
   return (
     <>
-      <main className="app-shell">
-        <AuthControls
-          user={user}
-          needsFirstAdmin={needsFirstAdmin}
-          onCreateFirstAdmin={() => setActiveDialog("first-admin")}
-          onLogin={() => setActiveDialog("login")}
-          onRequestAccess={() => setActiveDialog("request-access")}
-          onAdmin={() => setActiveDialog((current) => (current === "admin" ? null : "admin"))}
-          onLogout={logout}
-        />
+      <main className="app-shell" id="gallery">
+        <section className="browser-frame" aria-label="React Fashion Gallery application">
+          <div className="browser-chrome" aria-hidden="true">
+            <span className="browser-dot browser-dot-red" />
+            <span className="browser-dot browser-dot-yellow" />
+            <span className="browser-dot browser-dot-green" />
+            <div className="address-bar">fashion-gallery.com</div>
+          </div>
 
-        {activeDialog === "admin" ? (
-          <AdminRequestsPanel onClose={() => setActiveDialog(null)} />
-        ) : null}
+          <div className="browser-body">
+            <AuthControls
+              user={user}
+              needsFirstAdmin={needsFirstAdmin}
+              onCreateFirstAdmin={() => setActiveDialog("first-admin")}
+              onLogin={() => setActiveDialog("login")}
+              onRequestAccess={() => setActiveDialog("request-access")}
+              onAdmin={() => setActiveDialog((current) => (current === "admin" ? null : "admin"))}
+              onLogout={logout}
+            />
 
-        <FeaturedStrip
-          siteTitle={site.title}
-          image={featuredImage}
-          restrictedTags={restrictedTags}
-          user={user}
-          onOpen={() => openImage(featuredImage)}
-          onLogin={() => setActiveDialog("login")}
-          onRequestAccess={() => setActiveDialog("request-access")}
-        />
+            {activeDialog === "admin" ? (
+              <AdminRequestsPanel onClose={() => setActiveDialog(null)} />
+            ) : null}
 
-        <GalleryToolbar
-          query={query}
-          onQueryChange={setQuery}
-          tags={tags}
-          activeTag={activeTag}
-          onTagChange={setActiveTag}
-          sortMode={sortMode}
-          onSortModeChange={setSortMode}
-          resultCount={visibleImages.length}
-          onReset={resetFilters}
-        />
+            <FeaturedStrip
+              siteTitle={site.title}
+              image={featuredImage}
+              restrictedTags={restrictedTags}
+              user={user}
+              onOpen={() => openImage(featuredImage)}
+              onLogin={() => setActiveDialog("login")}
+              onRequestAccess={() => setActiveDialog("request-access")}
+              onPrevious={showPreviousFeature}
+              onNext={showNextFeature}
+            />
 
-        {visibleImages.length > 0 ? (
-          <ImageGrid
-            images={visibleImages}
-            restrictedTags={restrictedTags}
-            user={user}
-            onOpen={openImage}
-            onLogin={() => setActiveDialog("login")}
-            onRequestAccess={() => setActiveDialog("request-access")}
-          />
-        ) : (
-          <EmptyState onReset={resetFilters} />
-        )}
+            <GalleryToolbar
+              query={query}
+              onQueryChange={setQuery}
+              tags={tags}
+              activeTag={activeTag}
+              onTagChange={setActiveTag}
+              sortMode={sortMode}
+              onSortModeChange={setSortMode}
+              resultCount={visibleImages.length}
+              onReset={resetFilters}
+            />
+
+            {visibleImages.length > 0 ? (
+              <ImageGrid
+                images={visibleImages}
+                restrictedTags={restrictedTags}
+                user={user}
+                onOpen={openImage}
+                onLogin={() => setActiveDialog("login")}
+                onRequestAccess={() => setActiveDialog("request-access")}
+              />
+            ) : (
+              <EmptyState onReset={resetFilters} />
+            )}
+
+            <footer className="site-footer">
+              <p>
+                <ShieldCheck aria-hidden="true" />
+                You must be 18+ to view this content.
+              </p>
+              <button className="text-button" type="button" onClick={resetAgeConfirmation}>
+                Reset Age Confirmation
+              </button>
+            </footer>
+          </div>
+        </section>
       </main>
-
-      <footer className="site-footer">
-        <p>All content remains owned by its respective rights holders.</p>
-        <button className="text-button" type="button" onClick={resetAgeConfirmation}>
-          Reset age confirmation
-        </button>
-      </footer>
 
       <Lightbox
         image={selectedImage}
@@ -331,7 +376,11 @@ export default function App() {
       />
 
       {activeDialog === "login" ? (
-        <LoginDialog onClose={() => setActiveDialog(null)} onSuccess={handleAuthSuccess} />
+        <LoginDialog
+          onClose={() => setActiveDialog(null)}
+          onSuccess={handleAuthSuccess}
+          onRequestAccess={() => setActiveDialog("request-access")}
+        />
       ) : null}
 
       {activeDialog === "request-access" ? (

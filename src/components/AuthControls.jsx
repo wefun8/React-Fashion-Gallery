@@ -11,12 +11,22 @@ export default function AuthControls({
 
   return (
     <section className="auth-controls" aria-label="Account controls">
-      <div className="auth-user" aria-live="polite">
-        <span>Access</span>
-        <strong>{user?.displayName || "Visitor"}</strong>
+      <div className="brand-lockup" aria-label="React Fashion Gallery">
+        <strong>RFG</strong>
       </div>
 
+      <nav className="site-nav" aria-label="Primary navigation">
+        <a href="#gallery" aria-current="page">Gallery</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="#about">About</a>
+      </nav>
+
       <div className="auth-actions">
+        <div className="auth-user" aria-live="polite">
+          <span>Access:</span>
+          <strong>{user?.displayName || "Visitor"}</strong>
+        </div>
+
         {needsFirstAdmin ? (
           <button className="button button-primary" type="button" onClick={onCreateFirstAdmin}>
             Create First Admin

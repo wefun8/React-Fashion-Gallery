@@ -35,6 +35,15 @@ export default function AdminRequestsPanel({ onClose }) {
     loadRequests();
   }, [loadRequests]);
 
+  const counts = requests.reduce(
+    (result, request) => {
+      result.all += 1;
+      result[request.status] = (result[request.status] || 0) + 1;
+      return result;
+    },
+    { all: 0, pending: 0, approved: 0, rejected: 0 }
+  );
+
   async function approveRequest(request) {
     const password = window.prompt(`Initial password for ${request.displayName}`);
     if (!password) {
@@ -68,50 +77,62 @@ export default function AdminRequestsPanel({ onClose }) {
   return (
     <section className="admin-panel" aria-label="Admin account requests">
       <div className="admin-panel-header">
-        <div>
-          <p className="kicker">Admin</p>
-          <h2>Account Requests</h2>
-        </div>
-        <button className="text-button" type="button" onClick={onClose}>
-          Close
+        <strong>Admin Panel</strong>
+        <button className="panel-close" type="button" onClick={onClose} aria-label="Close admin panel">
+          x
         </button>
       </div>
+      <div className="admin-panel-body">
+        <div>
+          <h2>Account Requests</h2>
+        </div>
 
-      {status === "loading" ? <p className="admin-note">Loading requests.</p> : null}
-      {error ? <p className="form-error">{error}</p> : null}
-      {status === "ready" && requests.length === 0 ? (
-        <p className="admin-note">No account requests waiting.</p>
-      ) : null}
+        <div className="admin-tabs" aria-label="Request status summary">
+          <span>All ({counts.all})</span>
+          <span>Pending ({counts.pending})</span>
+          <span>Approved ({counts.approved})</span>
+          <span>Rejected ({counts.rejected})</span>
+        </div>
 
-      <div className="request-list">
-        {requests.map((request) => (
-          <article className="request-card" key={request.id}>
-            <div>
-              <h3>{request.displayName}</h3>
-              <p>{request.email}</p>
-              <p>{request.contact}</p>
-              <p>{request.reason}</p>
-              <strong className={`request-status request-status-${request.status}`}>
-                {request.status}
-              </strong>
-              <small>{formatDate(request.createdAt)}</small>
-            </div>
-            {request.status === "pending" ? (
-              <div className="request-actions">
-                <button
-                  className="button button-primary"
-                  type="button"
-                  onClick={() => approveRequest(request)}
-                >
-                  Approve
-                </button>
-                <button className="button" type="button" onClick={() => rejectRequest(request)}>
-                  Reject
-                </button>
+        {status === "loading" ? <p className="admin-note">Loading requests.</p> : null}
+        {error ? <p className="form-error">{error}</p> : null}
+        {status === "ready" && requests.length === 0 ? (
+          <p className="admin-note">No account requests waiting.</p>
+        ) : null}
+
+        <div className="request-list">
+          {requests.map((request) => (
+            <article className="request-card" key={request.id}>
+              <div className="request-avatar" aria-hidden="true">
+                {request.displayName.slice(0, 1).toUpperCase()}
               </div>
-            ) : null}
-          </article>
-        ))}
+              <div className="request-main">
+                <h3>{request.email}</h3>
+                <p>{request.displayName}</p>
+                <small>Requested {formatDate(request.createdAt)}</small>
+              </div>
+              <div className="request-side">
+                <strong className={`request-status request-status-${request.status}`}>
+                  {request.status}
+                </strong>
+                {request.status === "pending" ? (
+                  <div className="request-actions">
+                    <button
+                      className="button button-primary"
+                      type="button"
+                      onClick={() => approveRequest(request)}
+                    >
+                      Approve
+                    </button>
+                    <button className="button" type="button" onClick={() => rejectRequest(request)}>
+                      Reject
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

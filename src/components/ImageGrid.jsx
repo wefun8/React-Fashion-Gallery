@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Heart, LockKeyhole } from "lucide-react";
 import { isRestrictedImage } from "../lib/gallery.js";
 
 function ImageTile({ image, restrictedTags, user, onOpen, onLogin, onRequestAccess }) {
@@ -30,14 +31,14 @@ function ImageTile({ image, restrictedTags, user, onOpen, onLogin, onRequestAcce
             onError={() => setHasError(true)}
           />
         )}
-        <span className="tile-caption">
-          <strong>{image.title}</strong>
-          <small>{image.location || "Location TBD"}</small>
-        </span>
       </button>
       {!canView ? (
         <div className="restricted-overlay">
+          <span className="lock-mark" aria-hidden="true">
+            <LockKeyhole />
+          </span>
           <strong>Members only</strong>
+          <small>Login to view</small>
           <div>
             <button
               className="text-button"
@@ -58,6 +59,16 @@ function ImageTile({ image, restrictedTags, user, onOpen, onLogin, onRequestAcce
           </div>
         </div>
       ) : null}
+      <div className="tile-meta" aria-label={`${image.title} details`}>
+        <span>
+          <strong>{image.title}</strong>
+          <small>{image.tags[0] || image.location || "Lookbook"}</small>
+        </span>
+        <span className="like-count" aria-label={`${image.likes} likes`}>
+          <Heart aria-hidden="true" />
+          {image.likes}
+        </span>
+      </div>
     </article>
   );
 }

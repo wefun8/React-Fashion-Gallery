@@ -23,7 +23,7 @@ export default function GalleryToolbar({
           type="search"
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
-          placeholder="Title, city, tag"
+          placeholder="Search looks, tags, styles..."
         />
       </label>
 

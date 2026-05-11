@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { isRestrictedImage } from "../lib/gallery.js";
 
 export default function FeaturedStrip({
@@ -7,15 +8,17 @@ export default function FeaturedStrip({
   user,
   onOpen,
   onLogin,
-  onRequestAccess
+  onRequestAccess,
+  onPrevious,
+  onNext
 }) {
   if (!image) {
     return (
       <section className="featured-strip">
         <div className="featured-copy">
-          <p className="kicker">Now Showing</p>
-          <h1>{siteTitle}</h1>
-          <p>No images are available yet.</p>
+        <p className="kicker">Now Showing</p>
+        <h1>{siteTitle}</h1>
+        <p>No images are available yet.</p>
         </div>
         <div className="featured-empty" aria-hidden="true" />
       </section>
@@ -37,12 +40,12 @@ export default function FeaturedStrip({
   return (
     <section className="featured-strip" aria-labelledby="featured-title">
       <div className="featured-copy">
-        <p className="kicker">Now Showing</p>
+        <p className="kicker">Featured</p>
         <h1 id="featured-title">{siteTitle}</h1>
-        <p>{image.description || image.title}</p>
+        <p>{image.description || "Street looks for every mood."}</p>
         {canView ? (
           <button className="button button-primary" type="button" onClick={handleOpen}>
-            Open Feature
+            View Gallery <ArrowRight aria-hidden="true" />
           </button>
         ) : (
           <div className="featured-restricted-actions">
@@ -55,10 +58,17 @@ export default function FeaturedStrip({
           </div>
         )}
       </div>
-      <button
+      <div
         className={`featured-image${!canView ? " is-restricted" : ""}`}
-        type="button"
+        role="button"
+        tabIndex={0}
         onClick={handleOpen}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            handleOpen();
+          }
+        }}
         aria-label={canView ? `Open ${image.title}` : `Login to view ${image.title}`}
       >
         <img src={image.src} alt={image.title} loading="eager" />
@@ -71,7 +81,31 @@ export default function FeaturedStrip({
             Members only
           </em>
         ) : null}
-      </button>
+        <span className="featured-arrows" aria-label="Featured image controls">
+          <button
+            className="icon-button"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onPrevious();
+            }}
+            aria-label="Previous featured image"
+          >
+            <ArrowLeft aria-hidden="true" />
+          </button>
+          <button
+            className="icon-button"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onNext();
+            }}
+            aria-label="Next featured image"
+          >
+            <ArrowRight aria-hidden="true" />
+          </button>
+        </span>
+      </div>
     </section>
   );
 }
